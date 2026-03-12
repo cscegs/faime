@@ -491,6 +491,54 @@ nav button:hover:not(.active){color:var(--text);background:rgba(100,50,220,0.15)
 .client-list::-webkit-scrollbar{width:3px;}
 .client-list::-webkit-scrollbar-thumb{background:rgba(201,168,76,0.15);border-radius:2px;}
 
+/* ── Sort & Filter ── */
+.sf-wrap{position:relative;display:inline-block;}
+.sf-btn{
+  background:linear-gradient(135deg,rgba(201,168,76,0.18),rgba(201,168,76,0.07));
+  border:1px solid rgba(201,168,76,0.32);
+  color:var(--gold2);padding:6px 10px;border-radius:8px;
+  cursor:pointer;font-size:0.78rem;display:flex;align-items:center;gap:5px;
+  transition:all 0.2s;white-space:nowrap;flex-shrink:0;
+}
+.sf-btn:hover{background:rgba(201,168,76,0.22);box-shadow:0 0 14px rgba(201,168,76,0.12);}
+.sf-btn.active-filter{border-color:rgba(201,168,76,0.7);background:rgba(201,168,76,0.25);color:#f0d060;}
+.sf-dropdown{
+  display:none;position:absolute;top:calc(100% + 6px);right:0;z-index:9999;
+  background:linear-gradient(145deg,#0d1535,#0a1228);
+  border:1px solid rgba(201,168,76,0.22);border-radius:12px;
+  box-shadow:0 8px 32px rgba(0,0,0,0.6),0 0 0 1px rgba(201,168,76,0.08);
+  min-width:210px;overflow:hidden;
+}
+.sf-dropdown.open{display:block;animation:sfFadeIn 0.15s ease;}
+@keyframes sfFadeIn{from{opacity:0;transform:translateY(-6px);}to{opacity:1;transform:translateY(0);}}
+.sf-section{padding:6px 0;}
+.sf-section+.sf-section{border-top:1px solid rgba(201,168,76,0.1);}
+.sf-section-lbl{
+  font-size:0.58rem;letter-spacing:0.18em;text-transform:uppercase;
+  color:rgba(201,168,76,0.5);padding:6px 14px 2px;
+}
+.sf-item{
+  display:flex;align-items:center;gap:9px;
+  padding:8px 14px;cursor:pointer;font-size:0.82rem;color:var(--text2);
+  transition:background 0.15s;
+}
+.sf-item:hover{background:rgba(201,168,76,0.1);color:var(--gold2);}
+.sf-item.selected{color:var(--gold2);font-weight:600;}
+.sf-item .sf-ico{width:16px;text-align:center;font-size:0.88rem;flex-shrink:0;}
+.sf-item .sf-chk{margin-left:auto;font-size:0.75rem;color:var(--gold2);}
+.sf-divider{height:1px;background:rgba(201,168,76,0.08);margin:2px 0;}
+.sf-clear-btn{
+  display:block;width:100%;text-align:center;padding:8px 14px;
+  font-size:0.78rem;color:rgba(255,100,100,0.75);cursor:pointer;
+  transition:all 0.15s;
+}
+.sf-clear-btn:hover{color:#ff6666;background:rgba(255,60,60,0.07);}
+.sf-active-tag{
+  font-size:0.66rem;background:rgba(201,168,76,0.2);
+  color:var(--gold2);padding:1px 6px;border-radius:10px;
+  border:1px solid rgba(201,168,76,0.3);
+}
+
 .client-item {
   padding:12px 14px;
   cursor:pointer;
@@ -553,6 +601,58 @@ nav button:hover:not(.active){color:var(--text);background:rgba(100,50,220,0.15)
   text-shadow:0 0 30px rgba(201,168,76,0.2);
 }
 .page-sub{color:var(--muted);font-size:1rem;margin-bottom:26px;font-style:italic;}
+
+/* ── Daily Panchang ── */
+.dash-header-row{display:flex;flex-direction:column;gap:14px;margin-bottom:26px;}
+.dash-header-top{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;flex-wrap:wrap;}
+.dash-header-left .page-title{margin-bottom:4px;}
+.dash-header-left .page-sub{margin-bottom:0;}
+
+/* Wide Panchang Bar */
+.panchang-bar{
+  width:100%;
+  background:linear-gradient(135deg,rgba(8,14,40,0.97) 0%,rgba(14,22,60,0.97) 50%,rgba(8,14,40,0.97) 100%);
+  border:1px solid rgba(201,168,76,0.22);
+  border-radius:16px;
+  box-shadow:0 4px 28px rgba(0,0,0,0.45),inset 0 1px 0 rgba(201,168,76,0.1);
+  overflow:hidden;
+}
+.panchang-bar-header{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:9px 18px 8px;
+  border-bottom:1px solid rgba(201,168,76,0.12);
+  background:rgba(201,168,76,0.04);
+}
+.panchang-bar-title{
+  font-family:'Cinzel',serif;font-size:0.74rem;letter-spacing:0.18em;
+  color:var(--gold2);display:flex;align-items:center;gap:7px;
+}
+.panchang-bar-date{font-size:0.68rem;color:var(--muted);letter-spacing:0.03em;}
+.panchang-bar-body{
+  display:grid;
+  grid-template-columns:repeat(11,1fr);
+  gap:0;
+  padding:12px 0 10px;
+}
+.pc-cell{
+  display:flex;flex-direction:column;gap:3px;
+  padding:4px 14px;
+  border-right:1px solid rgba(201,168,76,0.07);
+}
+.pc-cell:last-child{border-right:none;}
+.pc-lbl{font-size:0.54rem;letter-spacing:0.13em;text-transform:uppercase;color:rgba(201,168,76,0.48);white-space:nowrap;}
+.pc-val{font-size:0.8rem;color:var(--text2);font-weight:500;white-space:nowrap;}
+.pc-val.gold{color:var(--gold2);font-weight:600;}
+.pc-val.red{color:#f87171;font-weight:700;}
+.pc-val.accent{color:#a78bfa;font-weight:600;}
+.panchang-loading{font-size:0.78rem;color:var(--muted);text-align:center;padding:18px 0;}
+@media(max-width:700px){
+  .panchang-bar-body{grid-template-columns:repeat(3,1fr);gap:8px 0;padding:10px 0;}
+  .pc-cell{padding:4px 12px;}
+}
+@media(max-width:420px){
+  .panchang-bar-body{grid-template-columns:repeat(2,1fr);}
+}
 
 .stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:28px;}
 .stat-card {
@@ -1910,8 +2010,47 @@ code{background:rgba(201,168,76,0.1);color:var(--gold);padding:2px 7px;border-ra
       <h3>Clients</h3>
       <button class="btn-add" onclick="showPage('add-client')">+ New</button>
     </div>
-    <div class="search-wrap">
-      <input type="text" id="searchInput" placeholder="🔍  Search client..." oninput="filterClients()">
+    <div class="search-wrap" style="display:flex;gap:7px;align-items:center;">
+      <input type="text" id="searchInput" placeholder="🔍  Search client..." oninput="filterClients()" style="flex:1;min-width:0;">
+      <div class="sf-wrap">
+        <button class="sf-btn" id="sfBtn" onclick="toggleSFDropdown(event)" title="Sort &amp; Filter">
+          <span>&#8693;</span><span style="font-size:0.72rem;">▼</span>
+        </button>
+        <div class="sf-dropdown" id="sfDropdown">
+          <div class="sf-section">
+            <div class="sf-section-lbl">Sort</div>
+            <div class="sf-item" onclick="setSFSort('az')"><span class="sf-ico">🔤</span> Sort A → Z<span class="sf-chk" id="sf-chk-az"></span></div>
+            <div class="sf-item" onclick="setSFSort('za')"><span class="sf-ico">🔤</span> Sort Z → A<span class="sf-chk" id="sf-chk-za"></span></div>
+            <div class="sf-item" onclick="setSFSort('newest')"><span class="sf-ico">🕐</span> Newest First<span class="sf-chk" id="sf-chk-newest"></span></div>
+            <div class="sf-item" onclick="setSFSort('oldest')"><span class="sf-ico">🕐</span> Oldest First<span class="sf-chk" id="sf-chk-oldest"></span></div>
+            <div class="sf-item" onclick="setSFSort('dob')"><span class="sf-ico">🎂</span> By Date of Birth<span class="sf-chk" id="sf-chk-dob"></span></div>
+          </div>
+          <div class="sf-section">
+            <div class="sf-section-lbl">Filter by Payment</div>
+            <div class="sf-item" onclick="toggleSFFilter('pay','Paid')"><span class="sf-ico">✅</span> Paid<span class="sf-chk" id="sf-chk-pay-Paid"></span></div>
+            <div class="sf-item" onclick="toggleSFFilter('pay','Pending')"><span class="sf-ico">⏳</span> Pending<span class="sf-chk" id="sf-chk-pay-Pending"></span></div>
+            <div class="sf-item" onclick="toggleSFFilter('pay','Advance')"><span class="sf-ico">💰</span> Advance<span class="sf-chk" id="sf-chk-pay-Advance"></span></div>
+          </div>
+          <div class="sf-section">
+            <div class="sf-section-lbl">Filter by Rashi</div>
+            <div class="sf-item" onclick="toggleSFFilter('rashi','Mesha')"><span class="sf-ico">♈</span> Mesha<span class="sf-chk" id="sf-chk-rashi-Mesha"></span></div>
+            <div class="sf-item" onclick="toggleSFFilter('rashi','Vrishabha')"><span class="sf-ico">♉</span> Vrishabha<span class="sf-chk" id="sf-chk-rashi-Vrishabha"></span></div>
+            <div class="sf-item" onclick="toggleSFFilter('rashi','Mithuna')"><span class="sf-ico">♊</span> Mithuna<span class="sf-chk" id="sf-chk-rashi-Mithuna"></span></div>
+            <div class="sf-item" onclick="toggleSFFilter('rashi','Karka')"><span class="sf-ico">♋</span> Karka<span class="sf-chk" id="sf-chk-rashi-Karka"></span></div>
+            <div class="sf-item" onclick="toggleSFFilter('rashi','Simha')"><span class="sf-ico">♌</span> Simha<span class="sf-chk" id="sf-chk-rashi-Simha"></span></div>
+            <div class="sf-item" onclick="toggleSFFilter('rashi','Kanya')"><span class="sf-ico">♍</span> Kanya<span class="sf-chk" id="sf-chk-rashi-Kanya"></span></div>
+            <div class="sf-item" onclick="toggleSFFilter('rashi','Tula')"><span class="sf-ico">♎</span> Tula<span class="sf-chk" id="sf-chk-rashi-Tula"></span></div>
+            <div class="sf-item" onclick="toggleSFFilter('rashi','Vrishchika')"><span class="sf-ico">♏</span> Vrishchika<span class="sf-chk" id="sf-chk-rashi-Vrishchika"></span></div>
+            <div class="sf-item" onclick="toggleSFFilter('rashi','Dhanu')"><span class="sf-ico">♐</span> Dhanu<span class="sf-chk" id="sf-chk-rashi-Dhanu"></span></div>
+            <div class="sf-item" onclick="toggleSFFilter('rashi','Makara')"><span class="sf-ico">♑</span> Makara<span class="sf-chk" id="sf-chk-rashi-Makara"></span></div>
+            <div class="sf-item" onclick="toggleSFFilter('rashi','Kumbha')"><span class="sf-ico">♒</span> Kumbha<span class="sf-chk" id="sf-chk-rashi-Kumbha"></span></div>
+            <div class="sf-item" onclick="toggleSFFilter('rashi','Meena')"><span class="sf-ico">♓</span> Meena<span class="sf-chk" id="sf-chk-rashi-Meena"></span></div>
+          </div>
+          <div class="sf-section">
+            <div class="sf-clear-btn" onclick="clearSFAll()">✕ Clear All Filters &amp; Sort</div>
+          </div>
+        </div>
+      </div>
     </div>
     <div class="client-list" id="clientList"></div>
   </div>
@@ -1921,8 +2060,17 @@ code{background:rgba(201,168,76,0.1);color:var(--gold);padding:2px 7px;border-ra
 
     <!-- ══ DASHBOARD ══ -->
     <div class="page active" id="page-dashboard">
-      <div class="page-title">नमस्ते 🙏</div>
-      <div class="page-sub">Welcome to your Vedic Astrology Client Management System</div>
+      <div class="dash-header-row">
+        <div class="dash-header-top">
+          <div class="dash-header-left">
+            <div class="page-title">नमस्ते 🙏</div>
+            <div class="page-sub">Welcome to your Vedic Astrology Client Management System</div>
+          </div>
+        </div>
+        <div class="panchang-bar" id="panchangCard">
+          <div class="panchang-loading">☀️ Loading Panchang…</div>
+        </div>
+      </div>
       <div class="stats-row">
         <div class="stat-card"><div class="stat-number" id="stat-total">0</div><div class="stat-label">Total Clients</div></div>
         <div class="stat-card"><div class="stat-number" id="stat-today">0</div><div class="stat-label">Added Today</div></div>
@@ -7370,6 +7518,256 @@ function getInvoiceNo(c){
 }
 
 // ══════════════════════════════════════════════
+// DAILY PANCHANG — Drik Method (fixed)
+// ══════════════════════════════════════════════
+(function initPanchang(){
+
+  var R = Math.PI / 180;
+
+  /* Julian Day from a UTC Date object */
+  function jdUTC(d){
+    var Y=d.getUTCFullYear(), M=d.getUTCMonth()+1,
+        D=d.getUTCDate() + (d.getUTCHours()+d.getUTCMinutes()/60+d.getUTCSeconds()/3600)/24;
+    if(M<=2){ Y--; M+=12; }
+    var A=Math.floor(Y/100), B=2-A+Math.floor(A/4);
+    return Math.floor(365.25*(Y+4716)) + Math.floor(30.6001*(M+1)) + D + B - 1524.5;
+  }
+
+  /* Sun tropical longitude (degrees) — Meeus Ch.25 */
+  function sunLon(JD){
+    var t=(JD-2451545)/36525;
+    var L0=(280.46646+36000.76983*t+0.0003032*t*t)%360;
+    var M=(357.52911+35999.05029*t-0.0001537*t*t)*R;
+    var C=(1.914602-0.004817*t-0.000014*t*t)*Math.sin(M)
+        +(0.019993-0.000101*t)*Math.sin(2*M)
+        +0.000289*Math.sin(3*M);
+    return ((L0+C)%360+360)%360;
+  }
+
+  /* Moon tropical longitude (degrees) — Meeus Ch.47 key terms */
+  function moonLon(JD){
+    var t=(JD-2451545)/36525;
+    var L =(218.3164477+481267.88123421*t-0.0015786*t*t)*R;
+    var D =(297.8501921+445267.1114034 *t-0.0018819*t*t)*R;
+    var M =(357.5291092+ 35999.0502909 *t-0.0001536*t*t)*R;
+    var Mp=(134.9633964+477198.8675055 *t+0.0087414*t*t)*R;
+    var F =(93.2720950 +483202.0175233 *t-0.0036539*t*t)*R;
+    var E=1-0.002516*t;
+    var dL=0;
+    dL+= 6.288774*Math.sin(Mp);
+    dL+= 1.274027*Math.sin(2*D-Mp);
+    dL+= 0.658314*Math.sin(2*D);
+    dL+= 0.213618*Math.sin(2*Mp);
+    dL-= 0.185116*E*Math.sin(M);
+    dL-= 0.114332*Math.sin(2*F);
+    dL+= 0.058793*Math.sin(2*D-2*Mp);
+    dL+= 0.057066*E*Math.sin(2*D-M-Mp);
+    dL+= 0.053322*Math.sin(2*D+Mp);
+    dL+= 0.045758*E*Math.sin(2*D-M);
+    dL-= 0.040923*E*Math.sin(M-Mp);
+    dL-= 0.034720*Math.sin(D);
+    dL-= 0.030383*E*Math.sin(M+Mp);
+    dL+= 0.015327*Math.sin(2*D-2*F);
+    dL-= 0.012528*Math.sin(Mp+2*F);   // FIXED: no *r outside
+    dL+= 0.010980*Math.sin(Mp-2*F);
+    dL+= 0.010675*Math.sin(4*D-Mp);
+    dL+= 0.010034*Math.sin(3*Mp);
+    dL+= 0.008548*Math.sin(4*D-2*Mp);
+    dL-= 0.007888*E*Math.sin(2*D+M-Mp);
+    dL-= 0.006766*E*Math.sin(2*D+M);
+    dL-= 0.005775*E*Math.sin(M+2*Mp);
+    dL+= 0.005765*E*Math.sin(M-2*D+Mp);
+    /* L is already in radians above; add dL (degrees) differently */
+    var lonDeg = (L/R + dL);
+    return ((lonDeg%360)+360)%360;
+  }
+
+  /* Lahiri Ayanamsha — FIXED: rate is 1.3972°/century (not /year) */
+  function ayanamsha(JD){
+    var t=(JD-2451545)/36525; // Julian centuries
+    return ((23.85048 + t*1.3972)%360+360)%360;
+  }
+
+  function sidSun(JD){ return ((sunLon(JD)-ayanamsha(JD))%360+360)%360; }
+  function sidMoon(JD){ return ((moonLon(JD)-ayanamsha(JD))%360+360)%360; }
+
+  /* ── Tithi ── */
+  var TITHIS=['Pratipada','Dwitiya','Tritiya','Chaturthi','Panchami',
+    'Shashthi','Saptami','Ashtami','Navami','Dashami','Ekadashi',
+    'Dwadashi','Trayodashi','Chaturdashi','Purnima',
+    'Pratipada','Dwitiya','Tritiya','Chaturthi','Panchami',
+    'Shashthi','Saptami','Ashtami','Navami','Dashami','Ekadashi',
+    'Dwadashi','Trayodashi','Chaturdashi','Amavasya'];
+  function getTithi(JD){
+    var diff=((moonLon(JD)-sunLon(JD))%360+360)%360;
+    var idx=Math.floor(diff/12); // 0-29
+    return {name:TITHIS[idx], paksha:idx<15?'Shukla':'Krishna'};
+  }
+
+  /* ── Nakshatra (Moon sidereal) ── */
+  var NAKS=['Ashwini','Bharani','Krittika','Rohini','Mrigashira','Ardra',
+    'Punarvasu','Pushya','Ashlesha','Magha','Purva Phalguni','Uttara Phalguni',
+    'Hasta','Chitra','Swati','Vishakha','Anuradha','Jyeshtha','Mula',
+    'Purva Ashadha','Uttara Ashadha','Shravana','Dhanishtha','Shatabhisha',
+    'Purva Bhadrapada','Uttara Bhadrapada','Revati'];
+  function getNakshatra(JD){ return NAKS[Math.floor(sidMoon(JD)/(360/27))%27]; }
+
+  /* ── Yoga (Sun+Moon sidereal sum) ── */
+  var YOGAS=['Vishkambha','Priti','Ayushman','Saubhagya','Shobhana','Atiganda',
+    'Sukarma','Dhriti','Shula','Ganda','Vriddhi','Dhruva','Vyaghata','Harshana',
+    'Vajra','Siddhi','Vyatipata','Variyan','Parigha','Shiva','Siddha','Sadhya',
+    'Shubha','Shukla','Brahma','Indra','Vaidhriti'];
+  function getYoga(JD){
+    return YOGAS[Math.floor(((sidSun(JD)+sidMoon(JD))%360)/(360/27))%27];
+  }
+
+  /* ── Karana ── */
+  var KM=['Bava','Balava','Kaulava','Taitila','Garaja','Vanija','Vishti'];
+  var KF=['Kimstughna','Shakuni','Chatushpada','Naga'];
+  function getKarana(JD){
+    var diff=((moonLon(JD)-sunLon(JD))%360+360)%360;
+    var k=Math.floor(diff/6); // 0-59
+    if(k===0) return KF[0];
+    if(k>=57) return KF[k-56];
+    return KM[(k-1)%7];
+  }
+
+  /* ── Solar Month (Sun sidereal rashi) ── */
+  var RASHIS=['Mesha','Vrishabha','Mithuna','Karka',
+    'Simha','Kanya','Tula','Vrishchika','Dhanu','Makara','Kumbha','Meena'];
+  function getSolarMonth(JD){ return RASHIS[Math.floor(sidSun(JD)/30)%12]; }
+
+  /* ── Vara ── */
+  var VARAS=['Ravivara ☀️','Somavara 🌙','Mangalavara 🔴','Budhavara 💚',
+    'Guruvara 🟡','Shukravara 🌸','Shanivara 🪐'];
+  var LORDS=['Surya','Chandra','Mangala','Budha','Guru','Shukra','Shani'];
+
+  /* ── Sunrise for Bhubaneswar (20.27°N, 85.84°E) in IST hours float ── */
+  function sunriseIST(istDate){
+    var lat=20.27*R;
+    var doy=Math.round((istDate - new Date(Date.UTC(istDate.getUTCFullYear(),0,1)))/86400000);
+    var B=R*360/365*(doy-81);
+    var decl=23.45*R*Math.sin(B);
+    var eqt=9.87*Math.sin(2*B)-7.53*Math.cos(B)-1.5*Math.sin(B); // minutes
+    var cosH=-Math.tan(lat)*Math.tan(decl);
+    cosH=Math.max(-1,Math.min(1,cosH));
+    var H=Math.acos(cosH)/R; // degrees
+    var solarNoon=12-(85.84-82.5)/15-eqt/60; // IST hours
+    return solarNoon-H/15;
+  }
+
+  /* ── Format IST hour float → "h:mm am/pm" ── */
+  function fmt(h){
+    h=((h%24)+24)%24;
+    var hh=Math.floor(h), mm=Math.round((h-hh)*60);
+    if(mm===60){hh=(hh+1)%24;mm=0;}
+    var ap=hh<12?'am':'pm';
+    var d=hh%12||12;
+    return d+':'+(mm<10?'0'+mm:mm)+' '+ap;
+  }
+
+  /* ── Rahu Kalam (period index from sunrise, 1.5h each) ── */
+  function rahuKalam(dow,sr){
+    var O=[8,2,7,5,6,4,3]; // Sun..Sat
+    var p=O[dow]; var s=sr+(p-1)*1.5;
+    return fmt(s)+' – '+fmt(s+1.5);
+  }
+
+  /* ── Gulika Kalam ── */
+  function gulikaKalam(dow,sr){
+    var O=[7,6,5,4,3,2,1];
+    var s=sr+(O[dow]-1)*1.5;
+    return fmt(s)+' – '+fmt(s+1.5);
+  }
+
+  /* ── Samvatsara — anchored: VS2082 = Vikrama (index 13) ── */
+  var SAMVAT=['Prabhava','Vibhava','Shukla','Pramoda','Prajapati','Angirasa',
+    'Shrimukha','Bhava','Yuva','Dhatru','Ishvara','Bahudhanya','Pramadhi',
+    'Vikrama','Vrisha','Chitrabhanu','Subhanu','Tarana','Parthiva','Vyaya',
+    'Sarvajit','Sarvadhari','Virodhi','Vikrita','Khara','Nandana','Vijaya',
+    'Jaya','Manmatha','Durmukhi','Hevilambi','Vilambi','Vikari','Sharvari',
+    'Plava','Shubhakrit','Shobhakrit','Krodhi','Vishvavasu','Parabhava',
+    'Plavanga','Kilaka','Saumya','Sadharana','Virodhikrit','Paridhavin',
+    'Pramadhi','Ananda','Rakshasa','Nala','Pingala','Kalayukti','Siddharthi',
+    'Raudra','Durmati','Dundubhi','Rudhirodgari','Raktakshi','Krodhana','Akshaya'];
+  function getSamvatsara(vs){ return SAMVAT[(vs+31)%60]; }
+
+  /* ── Era years ── */
+  function eras(istDate){
+    var y=istDate.getUTCFullYear(), mo=istDate.getUTCMonth(), d=istDate.getUTCDate();
+    var bs=(mo>3||(mo===3&&d>=14))?y+57:y+56; // Bikram Samvat
+    var se=(mo>2||(mo===2&&d>=22))?y-78:y-79; // Saka Era
+    return {bs:bs, se:se};
+  }
+
+  /* ── Main render ── */
+  function renderPanchang(){
+    try {
+      var now=new Date();
+      // FIXED: IST = UTC + 5h30m (just add offset to UTC ms, use getUTC* methods)
+      var istDate=new Date(now.getTime()+5.5*3600*1000);
+      var dow=istDate.getUTCDay();
+      var JD=jdUTC(now); // JD in UTC
+
+      var tithi=getTithi(JD);
+      var naksh=getNakshatra(JD);
+      var yoga=getYoga(JD);
+      var karna=getKarana(JD);
+      var vara=VARAS[dow];
+      var lord=LORDS[dow];
+      var solarM=getSolarMonth(JD);
+      var sr=sunriseIST(istDate);
+      var rahu=rahuKalam(dow,sr);
+      var gulika=gulikaKalam(dow,sr);
+      var era=eras(istDate);
+      var samvat=getSamvatsara(era.bs);
+      var dateStr=istDate.toLocaleDateString('en-IN',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+
+      var card=document.getElementById('panchangCard');
+      if(!card) return;
+
+      function cell(lbl,val,cls){
+        return '<div class="pc-cell"><div class="pc-lbl">'+lbl+'</div>'
+              +'<div class="pc-val'+(cls?' '+cls:'')+'">'+val+'</div></div>';
+      }
+
+      card.innerHTML=
+        '<div class="panchang-bar-header">'
+        +'<div class="panchang-bar-title">🪔 Daily Panchang</div>'
+        +'<div class="panchang-bar-date">'+dateStr+'</div>'
+        +'</div>'
+        +'<div class="panchang-bar-body">'
+        +cell('Vara · Lord',vara+'<br><span style="font-size:0.68rem;opacity:.7;">'+lord+'</span>','gold')
+        +cell('Tithi',tithi.paksha+'<br>'+tithi.name)
+        +cell('Nakshatra',naksh)
+        +cell('Yoga',yoga)
+        +cell('Karana',karna)
+        +cell('🐍 Rahu Kalam',rahu,'red')
+        +cell('Gulika Kalam',gulika)
+        +cell('Solar Month (Rashi)',solarM,'accent')
+        +cell('Samvatsara',samvat,'gold')
+        +cell('Bikram Sakabdha',era.bs+' BS')
+        +cell('Sana Sala (Saka)',era.se+' SE')
+        +'</div>';
+    } catch(e){
+      var card=document.getElementById('panchangCard');
+      if(card) card.innerHTML='<div style="padding:10px;color:#f87171;font-size:0.8rem;">Panchang error: '+e.message+'</div>';
+      console.error('Panchang error:',e);
+    }
+  }
+
+  if(document.readyState==='loading'){
+    document.addEventListener('DOMContentLoaded',renderPanchang);
+  } else {
+    renderPanchang();
+  }
+  var msToMidnight=new Date().setHours(24,0,0,0)-Date.now();
+  setTimeout(function(){ renderPanchang(); setInterval(renderPanchang,86400000); },msToMidnight);
+})();
+
+
+
+
 // DAILY BACKUP
 // ══════════════════════════════════════════════
 function initDailyBackup(){
@@ -7438,11 +7836,93 @@ function fmtDate(d){
   catch{return d;}
 }
 
+// ══════════════════════════════════════════════
+// SORT & FILTER STATE
+// ══════════════════════════════════════════════
+var sfSort = '';           // 'az','za','newest','oldest','dob'
+var sfFilters = {};        // {pay:['Paid'], rashi:['Tula',...]}
+
+function toggleSFDropdown(e){
+  e.stopPropagation();
+  var dd=document.getElementById('sfDropdown');
+  dd.classList.toggle('open');
+}
+document.addEventListener('click',function(e){
+  var dd=document.getElementById('sfDropdown');
+  if(dd&&!dd.closest('.sf-wrap').contains(e.target)) dd.classList.remove('open');
+});
+
+function setSFSort(key){
+  sfSort = sfSort===key?'':key;
+  updateSFUI();
+  renderSidebar();
+}
+
+function toggleSFFilter(group,val){
+  if(!sfFilters[group]) sfFilters[group]=[];
+  var idx=sfFilters[group].indexOf(val);
+  if(idx>=0) sfFilters[group].splice(idx,1);
+  else sfFilters[group].push(val);
+  if(!sfFilters[group].length) delete sfFilters[group];
+  updateSFUI();
+  renderSidebar();
+}
+
+function clearSFAll(){
+  sfSort=''; sfFilters={};
+  updateSFUI();
+  renderSidebar();
+  document.getElementById('sfDropdown').classList.remove('open');
+}
+
+function updateSFUI(){
+  // tick marks
+  ['az','za','newest','oldest','dob'].forEach(function(k){
+    var el=document.getElementById('sf-chk-'+k);
+    if(el) el.textContent = sfSort===k ? '✓' : '';
+  });
+  ['pay','rashi'].forEach(function(g){
+    var vals = sfFilters[g]||[];
+    var allVals = g==='pay'?['Paid','Pending','Advance']:
+      ['Mesha','Vrishabha','Mithuna','Karka','Simha','Kanya','Tula','Vrishchika','Dhanu','Makara','Kumbha','Meena'];
+    allVals.forEach(function(v){
+      var el=document.getElementById('sf-chk-'+g+'-'+v);
+      if(el) el.textContent = vals.includes(v)?'✓':'';
+    });
+  });
+  // button highlight
+  var hasAny = sfSort || Object.keys(sfFilters).length;
+  var btn=document.getElementById('sfBtn');
+  if(btn) btn.classList.toggle('active-filter',!!hasAny);
+}
+
+function applySFToList(list){
+  // Filter
+  if(sfFilters.pay && sfFilters.pay.length){
+    list=list.filter(function(c){ return sfFilters.pay.includes(c.payment||'Pending'); });
+  }
+  if(sfFilters.rashi && sfFilters.rashi.length){
+    list=list.filter(function(c){
+      if(!c.kundali) return false;
+      var lg=(c.kundali.lagna||'').split(' ')[0];
+      return sfFilters.rashi.includes(lg);
+    });
+  }
+  // Sort
+  if(sfSort==='az') list=list.slice().sort(function(a,b){return a.name.localeCompare(b.name);});
+  else if(sfSort==='za') list=list.slice().sort(function(a,b){return b.name.localeCompare(a.name);});
+  else if(sfSort==='newest') list=list.slice().sort(function(a,b){return new Date(b.addedDate||0)-new Date(a.addedDate||0);});
+  else if(sfSort==='oldest') list=list.slice().sort(function(a,b){return new Date(a.addedDate||0)-new Date(b.addedDate||0);});
+  else if(sfSort==='dob') list=list.slice().sort(function(a,b){return new Date(a.dob||0)-new Date(b.dob||0);});
+  return list;
+}
+
 function renderSidebar(){
   const list=document.getElementById('clientList');
   if(!clients.length){list.innerHTML='<div style="padding:22px;text-align:center;color:var(--muted);font-style:italic;font-size:0.88rem;">No clients yet.<br>Click <strong style="color:var(--gold)">+ New</strong> to begin!</div>';return;}
   const q=document.getElementById('searchInput').value.toLowerCase();
-  const filtered=clients.filter(c=>c.name.toLowerCase().includes(q)||(c.pob||'').toLowerCase().includes(q)||(c.phone||'').includes(q));
+  let filtered=clients.filter(c=>c.name.toLowerCase().includes(q)||(c.pob||'').toLowerCase().includes(q)||(c.phone||'').includes(q));
+  filtered=applySFToList(filtered);
   list.innerHTML=filtered.length?filtered.map(c=>`
     <div class="client-item ${c.id===currentClientId?'active':''}" data-id="${c.id}" onclick="viewClient(${c.id})">
       <div class="client-avatar">${c.name.charAt(0).toUpperCase()}</div>
